@@ -9,34 +9,32 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var sheetPosition: BottomSheetPosition = .middle
+    @StateObject var vm: MainViewModule
     
     var body: some View {
         ZStack {
             // Основной контент
-            ScrollView(.vertical) {
-                VStack(spacing: 30) {
-                    HeaderView()
-                    CityAndDateView()
-                    
-                    ZStack {
-                        Image("house")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 390, height: 390)
-                    }
+            VStack(spacing: 30) {
+                HeaderView()
+                CityAndDateView()
+                
+                ZStack {
+                    Image("house")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 390, height: 390)
                 }
-                .padding()
-                .background {
-                    Image("backView")
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                }
+            }
+            .padding()
+            .background {
+                Image("backView")
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
             }
             
             // Bottom Sheet
             BottomSheetView(position: $sheetPosition) {
                 VStack(spacing: 16) {
-                    // Индикатор для жеста
                     Capsule()
                         .fill(Color.gray.opacity(0.5))
                         .frame(width: 40, height: 5)
@@ -53,9 +51,12 @@ struct ContentView: View {
                     }
                 }
             }
+            .task {
+                vm.getLocation()
+            }
         }
     }
 }
 #Preview {
-    ContentView()
+    ContentView(vm: MainViewModule())
 }
