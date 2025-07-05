@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+final class NetworkService {
+    
+    static let shared = NetworkService()
+    
+    private init(){}
+    
+    func setupData() {
+        
+    }
+    
+}
