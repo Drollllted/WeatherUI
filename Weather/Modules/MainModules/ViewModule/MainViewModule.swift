@@ -9,6 +9,7 @@ import Foundation
 
 final class MainViewModule: ObservableObject {
     
+    @Published var weatherJSON: WelcomeJSON?
     @Published var locationService = LocationService()
     @Published var networkService = NetworkService()
     
@@ -21,7 +22,18 @@ final class MainViewModule: ObservableObject {
         
         DispatchQueue.main.async {
             print("23123")
-            self.networkService.setupData(latitude: latitude, longitude: longitude)
+        }
+    }
+    
+    func fetchWeather(latitude: Double, longitude: Double) {
+        networkService.setupData(latitude: latitude, longitude: longitude) { [weak self] result in
+            switch result{
+                
+            case .success(let data):
+                self?.weatherJSON = data
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 

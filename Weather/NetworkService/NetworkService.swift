@@ -14,17 +14,24 @@ final class NetworkService {
     private let hourlyTemperature = "&hourly=temperature_2m,precipitation_probability,cloud_cover"
     private let timeZoneAndOther = "&timezone=auto&past_days=1&forecast_days=1"
     
-    func setupData(latitude: Double, longitude: Double) {
+    func setupData(latitude: Double, longitude: Double, completion: @escaping (Result<WelcomeJSON, NetworkError>) -> Void) {
         guard let urlString = URL(string: "https://api.open-meteo.com/v1/forecast?latitude=\(latitude)&longitude=\(longitude)" + temperature_2m + hourlyTemperature + timeZoneAndOther) else {return}
         
         let task = URLSession.shared.dataTask(with: urlString) { data, _, _ in
-            guard let data = data else {return}
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
             
             do {
-                let json = String(data: data, encoding: .utf8)
-                print(json!)
+                let jsonDecoder = JSONDecoder()
+                let json = try jsonDecoder.decode(WelcomeJSON.self, from: data)
+                print(json)
+                completion(.success(json))
             } catch {
                 print(error.localizedDescription)
+                completion(.failure(.decodingFailed))
+                
             }
         }
         task.resume()
