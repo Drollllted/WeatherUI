@@ -21,18 +21,19 @@ final class MainViewModule: ObservableObject {
         print("location: \(latitude), \(longitude)")
         
         DispatchQueue.main.async {
-            print("23123")
+            self.fetchWeather(latitude: latitude, longitude: longitude)
         }
     }
     
     func fetchWeather(latitude: Double, longitude: Double) {
         networkService.setupData(latitude: latitude, longitude: longitude) { [weak self] result in
-            switch result{
-                
-            case .success(let data):
-                self?.weatherJSON = data
-            case .failure(let error):
-                print(error.localizedDescription)
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.weatherJSON = data
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }

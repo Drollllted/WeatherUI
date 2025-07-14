@@ -27,9 +27,18 @@ struct BottomSheetView<Content: View>: View {
                 self.content
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-            .background(.ultraThinMaterial)
-            .cornerRadius(20)
-            .shadow(radius: 10)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(hex: "#2E3358"),
+                        Color(hex: "#2E3358")
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .cornerRadius(50)
+            .shadow(radius: 25)
             .frame(height: geometry.size.height, alignment: .bottom)
             .offset(y: max(self.position.offset(in: geometry) + self.translation, 0))
             .animation(.interactiveSpring(), value: self.position)

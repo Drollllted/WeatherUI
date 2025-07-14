@@ -16,20 +16,22 @@ struct ContentView: View {
             // Основной контент
             VStack(spacing: 30) {
                 HeaderView()
-                CityAndDateView()
+                CityAndDateView(vm: vm)
                 
                 ZStack {
                     Image("house")
                         .resizable()
-                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 390, height: 390)
                 }
             }
             .padding()
             .background {
-                Image("backView")
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
+                ZStack{
+                    Image("backView")
+                        .aspectRatio(contentMode: .fit)
+                        .edgesIgnoringSafeArea(.all)
+                }
             }
             
             // Bottom Sheet
