@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeatherView: View {
+struct HourlyWeatherView: View {
     var body: some View {
         HStack(spacing: 15){
             Image("sunny")
@@ -18,5 +18,5 @@ struct WeatherView: View {
 }
 
 #Preview{
-    WeatherView()
+    HourlyWeatherView()
 }

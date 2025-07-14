@@ -49,7 +49,9 @@ struct ContentView: View {
                     
                     // Контент нижней панели
                     if sheetPosition == .top {
+                        
                     } else {
+                        
                     }
                 }
             }
