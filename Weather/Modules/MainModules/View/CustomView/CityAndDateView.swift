@@ -13,8 +13,8 @@ struct CityAndDateView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 10){
-            Text(vm.weatherJSON?.timezone ?? "Unknown")
-                .font(.largeTitle)
+            Text(vm.weatherJSON?.timezone.formatCity() ?? "Unknown")
+                .font(.system(size: 50))
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
             Text("\(Int(vm.weatherJSON?.daily.temperature2MMax.min() ?? 0.0).description)°")

@@ -31,6 +31,8 @@ struct HourlyWeatherView: View {
                     .padding(.horizontal)
             }
             
+            Divider()
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     if let hourly = vm.weatherJSON?.hourly {

@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct DetailForecaseView: View {
+    
+    @ObservedObject var vm: MainViewModule
+    
     var body: some View {
-        VStack{
-            
+        VStack(spacing: 20){
+            HourlyWeatherView(vm: vm)
         }
     }
 }
 
 #Preview {
-    DetailForecaseView()
+    DetailForecaseView(vm: MainViewModule())
 }

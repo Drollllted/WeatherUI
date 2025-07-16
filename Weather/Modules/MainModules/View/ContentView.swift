@@ -48,7 +48,8 @@ struct ContentView: View {
                     
                     // Контент нижней панели
                     if sheetPosition == .top {
-                        
+                        DetailForecaseView(vm: vm)
+                            .padding()
                     } else {
                         HourlyWeatherView(vm: vm)
                             .padding()
