@@ -15,7 +15,6 @@ struct ContentView: View {
         ZStack {
             // Основной контент
             VStack(spacing: 30) {
-                HeaderView()
                 CityAndDateView(vm: vm)
                 
                 ZStack {
@@ -51,7 +50,8 @@ struct ContentView: View {
                     if sheetPosition == .top {
                         
                     } else {
-                        
+                        HourlyWeatherView(vm: vm)
+                            .padding()
                     }
                 }
             }
